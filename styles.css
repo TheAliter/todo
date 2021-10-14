@@ -13,7 +13,7 @@
   --fs-300: 1.8rem;
   --fs-400: 2.2rem;
   --fs-600: 3.2rem;
-  --fs-xl: 10rem;
+  --fs-xl: calc(2rem + 4vw);
 
   --transition-speed-normal: 200ms;
 }
@@ -114,7 +114,7 @@ h2 {
 
 /* === ___MOBILE___ === */
 
-/* --- 1. Commons --- */
+/* --- 1. Shared --- */
 
 .section-title {
   margin: 2rem 0;
@@ -140,13 +140,13 @@ h2 {
 
 .main-container {
   display: flex;
-  max-width: 900px;
+  flex-direction: column;
+  align-items: center;
   margin: 0 auto;
-  align-items: flex-start;
 }
 
 .todo-lists-section {
-  width: 40%;
+  margin-bottom: 2rem;
 }
 
 .todo-lists {
@@ -179,7 +179,6 @@ h2 {
   display: none;
   position: relative;
   box-sizing: border-box;
-  width: 60%;
   background-color: white;
   color: var(--color-text-dark);
 }
@@ -193,6 +192,7 @@ h2 {
 }
 
 .tasks-count {
+  margin-left: 2rem;
   font-size: var(--fs-300);
   opacity: 0.75;
 }
@@ -315,4 +315,20 @@ h2 {
 
 .tasks-actions .btn:first-child {
   margin-right: 2rem;
+}
+
+@media (min-width: 900px) {
+  .main-container {
+    flex-direction: row;
+    max-width: 900px;
+    align-items: flex-start;
+  }
+
+  .todo-lists-section {
+    width: 40%;
+  }
+
+  .tasks-section {
+    width: 60%;
+  }
 }
