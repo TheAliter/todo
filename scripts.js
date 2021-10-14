@@ -7,11 +7,13 @@ const ACTIVE_TODO_LIST_ID_LOCAL_STORAGE = "active.todo.list.id";
 const todoListsContainer = document.querySelector(".todo-lists");
 const addTodoListForm = document.querySelector(".add-todo-list");
 const todoListInputElement = document.querySelector(".todo-list-input");
+const addTodoListButton = document.querySelector(".add-todo-list .btn-add");
 const tasksSectionElement = document.querySelector(".tasks-section");
 const tasksContainer = document.querySelector(".tasks");
 const tasksCountElement = document.querySelector(".tasks-count");
 const addTaskForm = document.querySelector(".add-task");
 const taskInputElement = document.querySelector(".task-input");
+const addTaskButton = document.querySelector(".add-task .btn-add");
 const taskItemTemplateElement = document.querySelector(".task-item-template");
 const clearCompletedTasksButtonElement = document.querySelector(
   ".tasks-actions .btn-clear"
@@ -46,6 +48,7 @@ todoListsContainer.addEventListener("click", (e) => {
 
 addTodoListForm.addEventListener("submit", (e) => {
   e.preventDefault();
+
   addTodoList(todoListInputElement.value);
   todoListInputElement.value = "";
   updateActiveTodoListId(todoLists.length);
@@ -56,6 +59,7 @@ addTodoListForm.addEventListener("submit", (e) => {
   }
 
   renderTasks();
+  addTodoListButton.blur();
 });
 
 tasksContainer.addEventListener("click", (e) => {
@@ -69,30 +73,30 @@ tasksContainer.addEventListener("click", (e) => {
     e.target.classList.contains("task-name")
   ) {
     toogleTaskCompletedState(e.target.parentElement.dataset.id);
-    console.log(
-      todoLists[activeTodoListId - 1].tasks[
-        e.target.parentElement.dataset.id - 1
-      ].completed
-    );
+    updateTasksCount();
     updateTodoListsInLocalStorage();
   }
 });
 
 addTaskForm.addEventListener("submit", (e) => {
   e.preventDefault();
+
   addTask(taskInputElement.value);
   taskInputElement.value = "";
   renderTasks();
+  addTaskButton.blur();
 });
 
-clearCompletedTasksButtonElement.addEventListener("click", () => {
+clearCompletedTasksButtonElement.addEventListener("click", (e) => {
   deleteCompletedTasks();
   updateTasksIds();
   updateTodoListsInLocalStorage();
   renderTasks();
+
+  e.target.blur();
 });
 
-deleteListButtonElement.addEventListener("click", () => {
+deleteListButtonElement.addEventListener("click", (e) => {
   deleteTodoList(activeTodoListId);
 
   let nextActiveTodoListId;
@@ -112,6 +116,8 @@ deleteListButtonElement.addEventListener("click", () => {
   } else {
     renderTasks();
   }
+
+  e.target.blur();
 });
 
 // ------------------------
@@ -201,11 +207,11 @@ function updateTasksCount() {
     return;
   }
 
-  const tasksName =
-    todoLists[activeTodoListId - 1].tasks.length === 1 ? "task" : "tasks";
-  tasksCountElement.textContent = `${
-    todoLists[activeTodoListId - 1].tasks.length
-  } ${tasksName} remaining`;
+  const activeTasksCount = todoLists[activeTodoListId - 1].tasks.filter(
+    (task) => !task.completed
+  ).length;
+  const tasksName = activeTasksCount === 1 ? "task" : "tasks";
+  tasksCountElement.textContent = `${activeTasksCount} ${tasksName} remaining`;
 }
 
 function updateTasksIds() {
