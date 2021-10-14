@@ -1,0 +1,318 @@
+/* === ____GLOBAL____ === */
+
+:root {
+  font-size: 62.5%;
+  font-family: Arial, sans-serif;
+
+  --color-accent: hsl(200 100% 40%);
+  --color-text-light: hsl(0 0% 100%);
+  --color-text-light-hover: hsl(0 0% 100% / 0.75);
+  --color-text-dark: hsl(0 0% 20%);
+  --color-text-dark-hover: hsl(0 0% 20% / 0.75);
+
+  --fs-300: 1.8rem;
+  --fs-400: 2.2rem;
+  --fs-600: 3.2rem;
+  --fs-xl: 10rem;
+
+  --transition-speed-normal: 200ms;
+}
+
+body {
+  background-color: var(--color-accent);
+  font-size: var(--fs-400);
+  color: var(--color-text-light);
+}
+
+/* === ___COMPONENTS___ === */
+
+h1 {
+  font-size: var(--fs-xl);
+  font-weight: 900;
+}
+
+h2 {
+  font-size: var(--fs-600);
+}
+
+.btn {
+  --size: 3.2rem;
+
+  width: var(--size);
+  height: var(--size);
+  padding: 0.5rem;
+  background-color: transparent;
+  border: none;
+  font-size: var(--fs-600);
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+  transition: color var(--transition-speed-normal);
+}
+
+.btn-light:focus,
+.btn-dark:focus {
+  outline: none;
+  border-radius: 50%;
+}
+
+.btn-light:focus {
+  border: 1px solid var(--color-text-light-hover);
+}
+
+.btn-dark:focus {
+  border: 1px solid var(--color-text-dark-hover);
+}
+
+.btn-light:focus,
+.btn-light:hover {
+  color: var(--color-text-light-hover);
+}
+
+.btn-dark:focus,
+.btn-dark:hover {
+  color: var(--color-text-dark-hover);
+}
+
+.item-input {
+  width: clamp(200px, 40%, 300px);
+  margin-right: 2rem;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-bottom: 2px solid var(--color-text-light);
+  background-color: transparent;
+  font-size: var(--fs-300);
+  color: inherit;
+  transition: all var(--transition-speed-normal);
+}
+
+.item-input:focus {
+  outline: none;
+}
+
+.input-light:hover,
+.input-light:hover {
+  border-bottom-color: var(--color-text-light-hover);
+}
+
+.input-dark:hover,
+.input-dark:hover {
+  border-bottom-color: var(--color-text-dark-hover);
+}
+
+.item-input::placeholder {
+  color: inherit;
+  opacity: 0.3;
+  font-weight: 200;
+  transform-origin: left;
+  transition: transform var(--transition-speed-normal);
+}
+
+.item-input:focus::placeholder {
+  transform: scale(0.9);
+}
+
+/* === ___MOBILE___ === */
+
+/* --- 1. Commons --- */
+
+.section-title {
+  margin: 2rem 0;
+  font-weight: 800;
+}
+
+.add-new-item {
+  display: flex;
+  align-items: flex-end;
+}
+
+.btn .fas {
+  font-size: var(--fs-400);
+}
+
+/* --- 2. Individuals --- */
+
+.title {
+  margin: 1rem 0 3rem 0;
+  text-align: center;
+  color: hsl(200 100% 10% / 0.3);
+}
+
+.main-container {
+  display: flex;
+  max-width: 900px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+.todo-lists-section {
+  width: 40%;
+}
+
+.todo-lists {
+  margin-bottom: 3rem;
+  padding-left: 1rem;
+  font-weight: 300;
+  list-style-type: circle;
+  list-style-position: inside;
+}
+
+.todo-list-item {
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transform-origin: left;
+  transition: transform var(--transition-speed-normal);
+}
+
+.todo-list-item:hover,
+.todo-list-item:focus {
+  outline: none;
+  transform: scale(1.02);
+}
+
+.todo-list-item.active {
+  list-style-type: disc;
+  font-weight: 900;
+}
+
+.tasks-section {
+  display: none;
+  position: relative;
+  box-sizing: border-box;
+  width: 60%;
+  background-color: white;
+  color: var(--color-text-dark);
+}
+
+.tasks-title-container {
+  display: flex;
+  padding-inline: 3rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: hsl(0, 0%, 90%);
+}
+
+.tasks-count {
+  font-size: var(--fs-300);
+  opacity: 0.75;
+}
+
+.tasks {
+  --color-text-completed: hsl(0 0% 75%);
+
+  margin: 0;
+  margin-top: 2rem;
+  padding: 0 3rem 2rem 3rem;
+}
+
+.task-item {
+  margin-block: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid hsl(0 0% 50% / 0.1);
+}
+
+.task-checkbox {
+  opacity: 0;
+}
+
+.task-custom-checkbox {
+  --size: 1rem;
+
+  position: relative;
+  left: -1rem;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  border: 2px solid var(--color-text-dark);
+  border-radius: 50%;
+  transition: all var(--transition-speed-normal);
+  cursor: pointer;
+}
+
+.task-checkbox:checked + .task-custom-checkbox {
+  background-color: var(--color-text-completed);
+  border-color: var(--color-text-completed);
+  border-width: 2px;
+  box-shadow: inset 0 0 0 2px white;
+}
+
+.task-item:hover .task-custom-checkbox,
+.task-checkbox:focus + .task-custom-checkbox {
+  transform: scale(1.1);
+}
+
+.task-name {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  transform-origin: left;
+  transition: transform var(--transition-speed-normal);
+}
+
+.task-item:hover .task-name,
+.task-checkbox:focus ~ .task-name {
+  transform: scale(1.01);
+}
+
+.task-name::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(50% - 1px);
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-text-completed);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--transition-speed-normal);
+}
+
+.task-checkbox:checked ~ .task-name {
+  font-weight: 300;
+  color: var(--color-text-completed);
+}
+
+.task-checkbox:checked ~ .task-name::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.add-task {
+  padding: 0 3rem 1rem 3rem;
+}
+
+.task-input {
+  min-width: 50%;
+  color: inherit;
+  border-bottom-color: inherit;
+}
+
+.task-input:focus {
+  min-width: 50%;
+  border-bottom-color: var(--color-text-dark-hover);
+}
+
+.tasks-actions {
+  position: absolute;
+  right: 0;
+  margin-top: 2rem;
+  color: var(--color-text-light);
+}
+
+.tasks-actions .btn {
+  width: auto;
+  border: none;
+  font-size: var(--fs-300);
+  opacity: 0.5;
+}
+
+.tasks-actions .btn:hover,
+.tasks-actions .btn:focus {
+  --color-text-light-hover: hsl(0 0% 100%);
+
+  opacity: 1;
+}
+
+.tasks-actions .btn:first-child {
+  margin-right: 2rem;
+}

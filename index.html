@@ -1,0 +1,66 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TO DO App</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      src="https://kit.fontawesome.com/da5ae1e492.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="scripts.js" type="module"></script>
+  </head>
+  <body>
+    <h1 class="title">GET SHIT DONE NOW</h1>
+    <main class="main-container">
+      <!-- LISTS SECTION -->
+      <section class="todo-lists-section">
+        <h2 class="section-title">My lists</h2>
+        <ul class="todo-lists"></ul>
+        <form action="" class="add-new-item add-todo-list">
+          <input
+            type="text"
+            placeholder="add new list"
+            class="item-input input-light todo-list-input"
+          />
+          <button type="submit" class="btn btn-add btn-light">
+            <i class="fas fa-plus"></i>
+          </button>
+        </form>
+      </section>
+
+      <!-- TASKS SECTION -->
+      <section class="tasks-section">
+        <div class="tasks-title-container">
+          <h2 class="section-title">List of Tasks</h2>
+          <span class="tasks-count"></span>
+        </div>
+        <ul class="tasks"></ul>
+        <form action="" class="add-new-item add-task">
+          <input
+            type="text"
+            placeholder="add new task"
+            class="item-input input-dark task-input"
+          />
+          <button type="submit" class="btn btn-add btn-dark">
+            <i class="fas fa-plus"></i>
+          </button>
+        </form>
+        <div class="tasks-actions">
+          <button class="btn btn-clear btn-light">Clear selected</button>
+          <button class="btn btn-delete btn-light">Delete list</button>
+        </div>
+      </section>
+    </main>
+
+    <template class="task-item-template">
+      <div class="task-item">
+        <input type="checkbox" class="task-checkbox" />
+        <span class="task-custom-checkbox"></span>
+        <label class="task-name"></label>
+      </div>
+    </template>
+  </body>
+</html>
