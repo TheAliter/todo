@@ -51,7 +51,7 @@ addTodoListForm.addEventListener("submit", (e) => {
   updateActiveTodoListId(todoLists.length);
   renderTodoLists();
 
-  if (tasksSectionElement.style.display == "none") {
+  if (getComputedStyle(tasksSectionElement).display === "none") {
     tasksSectionElement.style.display = "block";
   }
 
@@ -131,7 +131,6 @@ function addTodoList(listName) {
 
 function deleteTodoList(listId) {
   todoLists = todoLists.filter((todoList) => todoList.id !== listId);
-  // TODO: think if these functions should be here or in event listener
   updateTodoListsIds();
   updateTodoListsInLocalStorage();
 }
